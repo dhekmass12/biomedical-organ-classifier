@@ -173,5 +173,11 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+<<<<<<< HEAD
 train/
 test/
+=======
+
+#Project BioMedic Image
+/organ-all-mnist-DL20242025
+>>>>>>> 35d7a7a5a05c47ad81eb4e8230a0eec7842ea6ea
