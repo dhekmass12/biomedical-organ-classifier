@@ -53,7 +53,7 @@ def predict(args):
     # Load the saved class mapping and best model weights
     class_map = torch.load(args.class_map)
     num_classes = len(class_map)
-    # Define the same model architecture as in training
+    # Same model architecture as in training, could use additional separate file for model def
     class SimpleCNN(nn.Module):
         def __init__(self, num_classes):
             super(SimpleCNN, self).__init__()
@@ -109,7 +109,6 @@ def predict(args):
             ids.append(img_id)
             preds.append(test_dataset.idx_to_class[pred_indices[i].item()])
     
-    # Save predictions
     submission = pd.DataFrame({'id': ids, 'class': preds})
     submission.to_csv('submission.csv', index=False)
     print("Saved predictions to submission.csv")

@@ -91,12 +91,12 @@ def train(args):
     class_map = train_dataset.class_to_idx
     torch.save(class_map, args.output_prefix + '_class_map.pth')
     
-    # Define a simple CNN
+    # A simple CNN
     class SimpleCNN(nn.Module):
         def __init__(self, num_classes):
             super(SimpleCNN, self).__init__()
             self.features = nn.Sequential(
-                nn.Conv2d(3, 16, kernel_size=3, padding=1),  # input channels = 3 (views)
+                nn.Conv2d(3, 16, kernel_size=3, padding=1),  # input channels = 3
                 nn.ReLU(inplace=True),
                 nn.MaxPool2d(2),
                 nn.Conv2d(16, 32, kernel_size=3, padding=1),
@@ -133,7 +133,6 @@ def train(args):
     for epoch in range(args.epochs):
         model.train()
         running_loss = 0.0
-        # <-- wrap with tqdm -->
         for images, labels in tqdm(train_loader, desc=f"Epoch {epoch+1}/{args.epochs} [Training]"):
             images, labels = images.to(device), labels.to(device)
             optimizer.zero_grad()
@@ -147,7 +146,6 @@ def train(args):
         # Validation
         model.eval()
         correct = total = 0
-        # <-- wrap with tqdm -->
         for images, labels in tqdm(val_loader, desc=f"Epoch {epoch+1}/{args.epochs} [Validating]"):
             images, labels = images.to(device), labels.to(device)
             with torch.no_grad():
